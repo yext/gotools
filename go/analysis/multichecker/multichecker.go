@@ -15,10 +15,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"golang.org/x/tools/go/analysis"
-	"golang.org/x/tools/go/analysis/internal/analysisflags"
-	"golang.org/x/tools/go/analysis/internal/checker"
-	"golang.org/x/tools/go/analysis/unitchecker"
+	"github.com/yext/gotools/go/analysis"
+	"github.com/yext/gotools/go/analysis/internal/analysisflags"
+	"github.com/yext/gotools/go/analysis/internal/checker"
+	"github.com/yext/gotools/go/analysis/unitchecker"
 )
 
 func Main(analyzers ...*analysis.Analyzer) {
@@ -43,12 +43,12 @@ Usage: %[1]s [-flag] [package]
 Run '%[1]s help' for more detail,
  or '%[1]s help name' for details and flags of a specific analyzer.
 `, progname)
-		os.Exit(1)
+		//os.Exit(1)
 	}
 
 	if args[0] == "help" {
 		analysisflags.Help(progname, analyzers, args[1:])
-		os.Exit(0)
+		//os.Exit(0)
 	}
 
 	if len(args) == 1 && strings.HasSuffix(args[0], ".cfg") {
@@ -56,5 +56,5 @@ Run '%[1]s help' for more detail,
 		panic("unreachable")
 	}
 
-	os.Exit(checker.Run(args, analyzers))
+	checker.Run(args, analyzers)
 }
